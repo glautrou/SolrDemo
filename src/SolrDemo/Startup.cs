@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SolrDemo.Controllers;
+using SolrDemo.Models;
 using SolrNet;
 using SolrNet.Microsoft.DependencyInjection;
 
@@ -28,7 +29,7 @@ namespace SolrDemo
         {
             //services.AddSolrNet("http://localhost:8983/gettingstarted");
             //services.AddSolrNet("http://localhost:8983/solr");
-            services.AddSolrNet<Product>("http://localhost:8983/solr/demo_core");
+            services.AddSolrNet<UserRequests>("http://localhost:8983/solr/user_requests");
 
             services.AddControllersWithViews();
         }

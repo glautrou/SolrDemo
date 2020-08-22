@@ -14,9 +14,9 @@ namespace SolrDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ISolrOperations<Product> _solr;
+        private readonly ISolrOperations<UserRequests> _solr;
 
-        public HomeController(ILogger<HomeController> logger, ISolrOperations<Product> solr)
+        public HomeController(ILogger<HomeController> logger, ISolrOperations<UserRequests> solr)
         {
             _logger = logger;
             _solr = solr;
@@ -24,21 +24,24 @@ namespace SolrDemo.Controllers
 
         public IActionResult Index()
         {
-            var p = new Product
+            var userRequests = new UserRequests
             {
-                Id = "SP2514N",
-                Manufacturer = "Samsung Electronics Co. Ltd.",
-                Categories = new[] { "electronics", "hard drive" },
-                Price = 92,
-                InStock = true,
+                Id = 1,
+                Reference = "U001",
+                Firstname = "Gilles",
+                Firstname2 = "Gilles",
+                Lastname = "Lautrou"
             };
 
             //Add
-            //_solr.Add(p);
-            //_solr.Commit();
+            _solr.Add(userRequests);
+            _solr.Commit();
 
             //Get
-            var results = _solr.Query(new SolrQueryByField("id", "SP2514N"));
+            var results1 = _solr.Query(new SolrQueryByField("id", "1"));
+            var results2 = _solr.Query(new SolrQueryByField("firstname2", "Gilles"));
+            var results3 = _solr.Query(new SolrQueryByField("firstname2", "gilles"));
+            var results4 = _solr.Query(new SolrQueryByField("firstname2", "lles"));
 
             return View();
         }

@@ -1,0 +1,28 @@
+#Doc: https://lucene.apache.org/solr/guide/7_6/schema-api.html
+
+#Add case-insensitive type
+curl -X POST -H "Content-type:application/json" --data-binary "{\"add-field-type\" : {\"name\":\"string_ci\",\"class\":\"solr.TextField\",\"positionIncrementGap\":\"100\",\"analyzer\":{\"tokenizer\":{\"class\":\"solr.KeywordTokenizerFactory\" }\"filters\":[{\"class\":\"solr.LowercaseFilterFactory\"}]}}}" http://localhost:8983/solr/user_requests/schema
+
+#Add fields
+curl --X POST -H "Content-type:application/json" --data-binary "{\"add-field\": {\"name\":\"id\", \"type\":\"pint\", \"multiValued\":false, \"stored\":true}}" http://localhost:8983/solr/user_requests/schema
+curl --X POST -H "Content-type:application/json" --data-binary "{\"add-field\": {\"name\":\"reference\", \"type\":\"string\", \"multiValued\":false, \"stored\":true}}" http://localhost:8983/solr/user_requests/schema
+curl --X POST -H "Content-type:application/json" --data-binary "{\"add-field\": {\"name\":\"firstname\", \"type\":\"string\", \"multiValued\":false, \"stored\":true}}" http://localhost:8983/solr/user_requests/schema
+curl --X POST -H "Content-type:application/json" --data-binary "{\"add-field\": {\"name\":\"firstname2\", \"type\":\"string_ci\", \"multiValued\":false, \"stored\":true}}" http://localhost:8983/solr/user_requests/schema
+curl --X POST -H "Content-type:application/json" --data-binary "{\"add-field\": {\"name\":\"lastname\", \"type\":\"string\", \"multiValued\":false, \"stored\":true}}" http://localhost:8983/solr/user_requests/schema
+
+#Test case inseitive
+#curl -X POST -H "Content-type:application/json" --data-binary "{
+#  \"add-field-type\" : {
+#     \"name\":\"string_ci\",
+#     \"class\":\"solr.TextField\",
+#     \"positionIncrementGap\":\"100\",
+#     \"analyzer\":{
+#        \"tokenizer\":{
+#           \"class\":\"solr.KeywordTokenizerFactory\" 
+#        }
+#        \"filters\":[{
+#           \"class\":\"solr.LowercaseFilterFactory\"
+#        }]
+#     }
+#  }
+#}" http://localhost:8983/solr/gettingstarted/schema

@@ -7,4 +7,4 @@ solr:
     - solrdata:/var/solr2
   entrypoint:
     - solr-precreate
-    - demo_core
+    - user_requests
