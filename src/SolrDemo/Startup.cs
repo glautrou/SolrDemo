@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SolrDemo.Controllers;
+using SolrNet;
+using SolrNet.Microsoft.DependencyInjection;
 
 namespace SolrDemo
 {
@@ -23,6 +26,10 @@ namespace SolrDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddSolrNet("http://localhost:8983/gettingstarted");
+            //services.AddSolrNet("http://localhost:8983/solr");
+            services.AddSolrNet<Product>("http://localhost:8983/solr/demo_core");
+
             services.AddControllersWithViews();
         }
 
