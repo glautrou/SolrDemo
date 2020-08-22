@@ -1,0 +1,10 @@
+solr:
+  image: solr
+  container_name: solr_demo
+  ports:
+    - "8983:8983"
+  volumes:
+    - solrdata:/var/solr2
+  entrypoint:
+    - solr-precreate
+    - demo_core
